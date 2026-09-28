@@ -1,0 +1,54 @@
+@baseUrl = http://localhost:5000/api
+@articleId = 66f000000000000000000101
+
+### 1. (POST)
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "Kỹ thuật nâng cao trong TypeScript",
+  "summary": "Khám phá Generics và Utility Types trong TypeScript.",
+  "content": "Nội dung chi tiết bài viết về TypeScript...",
+  "author": "Thái Huy",
+  "category": "Lập trình",
+  "tags": ["typescript", "backend", "nodejs"],
+  "isPublished": true
+}
+
+### 2. (GET)
+GET {{baseUrl}}/articles
+
+### 3. Lấy bài viết theo ID
+GET {{baseUrl}}/articles/{{articleId}}
+
+### 4.(PUT)
+PUT {{baseUrl}}/articles/{{articleId}}
+Content-Type: application/json
+
+{
+  "title": "Kỹ thuật nâng cao trong TypeScript (Đã cập nhật)",
+  "summary": "Tóm tắt đã thay đổi"
+}
+
+### 5.(DELETE)
+DELETE {{baseUrl}}/articles/{{articleId}}
+
+
+### Test A: Lỗi 400 
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "content": "Thiếu các trường bắt buộc xem Zod bắt lỗi thế nào",
+  "author": "Thái Huy",
+  "category": "Lập trình"
+}
+
+### Test B: Lỗi 404 ID 
+GET {{baseUrl}}/articles/66f000000000000000009999
+
+### Test C: Lỗi 404 Truy cập 
+GET {{baseUrl}}/api/duong-dan-khong-ton-tai
+
+### Test D: Lỗi 500 Lỗi hệ thống nội bộ
+GET {{baseUrl}}/articles/test-error-500
